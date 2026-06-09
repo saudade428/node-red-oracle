@@ -1,14 +1,13 @@
 name: Build and Push Node-RED Oracle Image
 
 on:
-  # 當修改並推送到 main 分支時觸發
+  workflow_dispatch: # 加入這一行，開啟網頁手動觸發按鈕
   push:
     branches:
       - main
-    paths:
-      - 'Dockerfile'
-  # 排程觸發：每週日半夜自動重包一次
-  # 這樣即使你沒改程式，也能固定抓取官方最新的 node-red:latest-debian 底層更新
+    # 測試階段可以先將 paths 註解掉或刪除，這樣只要有檔案推播就會觸發
+    # paths:
+    #   - 'Dockerfile'
   schedule:
     - cron: '0 0 * * 0'
 
