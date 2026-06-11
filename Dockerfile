@@ -3,12 +3,10 @@ FROM nodered/node-red:latest-debian
 USER root
 
 # 1. 補上 ca-certificates，確保 wget 能正確驗證 HTTPS 連線
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    unzip \
-    libaio1 \
-    wget \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    (apt-get install -y --no-install-recommends unzip libaio1 wget ca-certificates || \
+     apt-get install -y --no-install-recommends unzip libaio1t64 wget ca-certificates) && \
+    rm -rf /var/lib/apt/lists/*
 
 # 2. 建立 Oracle 工作目錄
 WORKDIR /opt/oracle
