@@ -6,8 +6,8 @@ on:
     branches:
       - main
     # 測試階段可以先將 paths 註解掉或刪除，這樣只要有檔案推播就會觸發
-     paths:
-       - 'Dockerfile'
+    paths:
+      - 'Dockerfile'
   schedule:
     - cron: '0 0 * * 0'
 
