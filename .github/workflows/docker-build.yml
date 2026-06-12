@@ -1,19 +1,21 @@
 name: Build and Push Node-RED Oracle Image
 
 on:
-  workflow_dispatch: # 加入這一行，開啟網頁手動觸發按鈕
+  workflow_dispatch:
+
   push:
     branches:
       - main
-    # 測試階段可以先將 paths 註解掉或刪除，這樣只要有檔案推播就會觸發
     paths:
       - 'Dockerfile'
+
   schedule:
     - cron: '0 0 * * 0'
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,5 +31,4 @@ jobs:
         with:
           context: .
           push: true
-          # 這裡的標籤請替換成你的習慣，例如 nodered-oracle
           tags: ${{ secrets.DOCKER_USERNAME }}/nodered-oracle:latest
