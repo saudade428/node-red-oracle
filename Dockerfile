@@ -1,14 +1,25 @@
-FROM nodered/node-red:latest-debian
+#舊版debian
+#FROM nodered/node-red:latest-debian
+
+#USER root
+
+# 1. 僅透過 apt-get 安裝不會衝突的基礎工具
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#    unzip \
+#    wget \
+#    ca-certificates \
+#    && rm -rf /var/lib/apt/lists/*
+FROM nodered/node-red:5.0.3-debian
 
 USER root
 
-# 1. 僅透過 apt-get 安裝不會衝突的基礎工具
 RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     wget \
     ca-certificates \
+    libaio1t64 \
+    && ln -snf libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1 \
     && rm -rf /var/lib/apt/lists/*
-
 # 2. 🌟 關鍵修正：直接下載並植入舊版 libaio1 的官方 deb 檔
 # 透過全域 CDN 下載，避開 apt 套件庫的版本限制
 RUN wget http://deb.debian.org/debian/pool/main/liba/libaio/libaio1_0.3.113-4_amd64.deb && \
