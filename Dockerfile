@@ -1,4 +1,4 @@
-ARG BASE_TAG=5.0.3-debian
+ARG BASE_TAG=5-debian
 FROM nodered/node-red:${BASE_TAG}
 
 ARG ORACLE_DIR=1927000
