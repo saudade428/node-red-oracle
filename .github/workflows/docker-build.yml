@@ -63,9 +63,7 @@ jobs:
           images: ${{ env.IMAGE }}
           tags: |
             type=raw,value=${{ steps.ver.outputs.nr }}-oracle${{ env.ORACLE_RU }}
-            type=raw,value=5-oracle${{ env.ORACLE_RU }}
             type=raw,value=latest
-            type=sha
 
       - name: Push image
         uses: docker/build-push-action@v6
